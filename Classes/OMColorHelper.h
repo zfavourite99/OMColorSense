@@ -15,9 +15,11 @@ typedef enum OMColorType {
 	OMColorTypeUIRGBA,				//[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]
 	OMColorTypeUIRGBAInit,			//[[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:1.0]
 	OMColorTypeUIWhite,				//[UIColor colorWithWhite:0.5 alpha:1.0]
-	OMColorTypeUIWhiteInit,			//[[UIColor alloc] initWithWhite:0.5 alpha:1.0]
+	OMColorTypeUIWhiteInit,			//[[UIColor alloc] initWithWhite:0.500 alpha:1.000]
 	OMColorTypeUIConstant,			//[UIColor redColor]
     OMColorTypeUIHex,               //[UIColor colorWithHex:@"#ff00ad"]
+    OMColorTypeRGBMacro,            //RGB(255, 255, 255) | rgb(255, 255, 255) ignoring case
+    OMColorTypeRGBAMacro,           //RGBA(255, 255, 255, 1) | rgba(255, 255, 255, 0.5) ignoring case
 	
 	OMColorTypeNSRGBACalibrated,	//[NSColor colorWithCalibratedRed:1.0 green:0.0 blue:0.0 alpha:1.0]
 	OMColorTypeNSRGBADevice,		//[NSColor colorWithDeviceRed:1.0 green:0.0 blue:0.0 alpha:1.0]
@@ -42,7 +44,9 @@ BOOL OMColorTypeIsNSColor(OMColorType colorType) { return colorType >= OMColorTy
 	NSTextView *_textView;
 	NSDictionary *_constantColorsByName;
 	
-	NSRegularExpression *_rgbaUIColorRegex;
+    NSRegularExpression *_rgbaUIColorRegex;
+    NSRegularExpression *_rgbMacroDefineRegex;
+    NSRegularExpression *_rgbaMacroDefineRegex;
 	NSRegularExpression *_rgbaNSColorRegex;
 	NSRegularExpression *_whiteNSColorRegex;
 	NSRegularExpression *_whiteUIColorRegex;
